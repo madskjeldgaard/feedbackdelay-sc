@@ -1,0 +1,50 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "clean",
+      "type": "shell",
+      "command": "rm -rf build",
+    },
+    {
+      "label": "Configure Release",
+      "type": "shell",
+      "command": "cmake -S . -B build -DCMAKE_BUILD_TYPE=Release",
+    },
+    {
+      "label": "Configure for Debug",
+      "type": "shell",
+      "command": "cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug",
+    },
+    {
+      "label": "Build for Debug",
+      "type": "shell",
+      "command": "cmake --build build --config Debug",
+      "dependsOn": "Configure for Debug",
+      "group": {
+        "kind": "build"
+      },
+      "problemMatcher": "$gcc",
+    },
+    {
+      "label": "Build release",
+      "type": "shell",
+      "command": "cmake --build build --config Release",
+      "dependsOn": "Configure Release",
+      "group": {
+        "kind": "build"
+      },
+      "problemMatcher": "$gcc",
+    },
+    {
+      "label": "Install release",
+      "type": "shell",
+      "command": "cmake --build build --config Release --target install",
+      "dependsOn": "Configure Release",
+      "group": {
+        "kind": "build"
+      },
+      "problemMatcher": "$gcc",
+    },
+  ]
+}

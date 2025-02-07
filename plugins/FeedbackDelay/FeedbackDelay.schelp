@@ -1,0 +1,26 @@
+class:: FeedbackDelay
+summary:: A feedback delay plugin for SuperCollider
+related:: TODO
+categories:: UGens>TODO
+
+description::
+
+A feedback delay plugin for SuperCollider
+
+
+classmethods::
+
+method::ar, kr
+
+argument::TODO
+
+argument::TODO
+
+
+examples::
+
+code::
+
+{ FeedbackDelay.ar(/* TODO */) }.play
+
+::
