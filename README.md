@@ -4,11 +4,17 @@
 
 Does what it says on the tin: A feedback delay plugin for SuperCollider with cubic interpolation and support for both audio and control rate arguments.
 
-### Requirements
+## Development
+
+The delay line code is written using modern C++ templating tricks, to allow easily making variations with different operations.
+
+All dependencies are handled by [CPM](https://github.com/cpm-cmake/CPM.cmake).
+
+## Requirements
 
 - CMake >= 3.12
 
-### Building
+## Building
 
 The project uses CPM to download the supercollider code and necessary dependencies. 
 
