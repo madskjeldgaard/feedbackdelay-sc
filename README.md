@@ -1,8 +1,8 @@
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/X8X6RXV10)
+
 # FeedbackDelay
 
-Author: Mads Kjeldgaard
-
-A feedback delay plugin for SuperCollider
+Does what it says on the tin: A feedback delay plugin for SuperCollider with cubic interpolation and support for both audio and control rate arguments.
 
 ### Requirements
 

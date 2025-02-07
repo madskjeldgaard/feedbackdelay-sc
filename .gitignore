@@ -1,4 +1,5 @@
 .vimrc
+.cache
 
 build*
 

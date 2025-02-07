@@ -1,39 +1,52 @@
-// PluginFeedbackDelay.cpp
-// Mads Kjeldgaard (madskjeldgaardnielsen@gmail.com)
-
-#include "SC_PlugIn.hpp"
 #include "FeedbackDelay.hpp"
+#include "SC_PlugIn.hpp"
 
-static InterfaceTable* ft;
+static InterfaceTable *ft;
 
 namespace FeedbackDelay {
 
 FeedbackDelay::FeedbackDelay() {
-    mCalcFunc = make_calc_function<FeedbackDelay, &FeedbackDelay::next>();
-    next(1);
+  delayTimePast = in0(DELAYTIME);
+  feedbackPast = in0(FEEDBACK);
+
+  float maxDelayTime = in0(MAX_DELAYTIME);
+  isDelayTimeAudioRate = isAudioRateIn(DELAYTIME);
+  isFeedbackAudioRate = isAudioRateIn(FEEDBACK);
+
+  // Just pass through the audio with an amount of feedback
+  auto feedbackFunc = [](float feedback, float delayed) {
+    return feedback * delayed;
+  };
+
+  delayLine = std::make_unique<DelayLine<FeedbackFunc>>(
+      this->sampleRate(), maxDelayTime, feedbackFunc);
+
+  mCalcFunc = make_calc_function<FeedbackDelay, &FeedbackDelay::next>();
+  next(1);
 }
 
 void FeedbackDelay::next(int nSamples) {
+  const float *input = in(AUDIOINPUT);
+  float *outbuf = out(0);
 
-    // Audio rate input
-    const float* input = in(0);
+  for (int i = 0; i < nSamples; ++i) {
+    float delayTime = isDelayTimeAudioRate
+                          ? in(DELAYTIME)[i]
+                          : makeSlope(in0(DELAYTIME), delayTimePast).consume();
+    float feedback = isFeedbackAudioRate
+                         ? in(FEEDBACK)[i]
+                         : makeSlope(in0(FEEDBACK), feedbackPast).consume();
 
-    // Control rate parameter: gain.
-    const float gain = in0(1);
+    outbuf[i] = delayLine->process(input[i], delayTime, feedback);
+  }
 
-    // Output buffer
-    float* outbuf = out(0);
-
-    // simple gain function
-    for (int i = 0; i < nSamples; ++i) {
-        outbuf[i] = input[i] * gain;
-    }
+  delayTimePast = in0(DELAYTIME);
+  feedbackPast = in0(FEEDBACK);
 }
 
 } // namespace FeedbackDelay
 
 PluginLoad(FeedbackDelayUGens) {
-    // Plugin magic
-    ft = inTable;
-    registerUnit<FeedbackDelay::FeedbackDelay>(ft, "FeedbackDelay", false);
+  ft = inTable;
+  registerUnit<FeedbackDelay::FeedbackDelay>(ft, "FeedbackDelay", false);
 }
