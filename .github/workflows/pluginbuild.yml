@@ -71,9 +71,8 @@ jobs:
       run: 7z a "$ARCHIVE_NAME" -tzip "FeedbackDelay"
 
     - name: Upload binaries to release
-      uses: svenstaro/upload-release-action@v2
+      uses: svenstaro/upload-release-action@v2.9.0
       with:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: ${{ env.INSTALL_PATH }}/${{ env.ARCHIVE_NAME }}
         prerelease: true
         body: ""
