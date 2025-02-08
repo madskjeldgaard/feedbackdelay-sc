@@ -195,12 +195,12 @@ private:
   }
 
   // Parameters:
+  float sampleRate;
   int filterType;
   float cutoffFreq;
   float Q;
   float shelfGain;
 
-  float sampleRate;
   bool active = true; // is the filter processing or not
 
   // Coefficients:
