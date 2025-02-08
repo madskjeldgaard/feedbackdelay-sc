@@ -7,8 +7,8 @@ Does what it says on the tin: A feedback delay plugin for SuperCollider with cub
 ## Features
 
 The following plugins are included:
-- FeedbackDelay: A feedback delay with cubic interpolation and support for both audio and control rate arguments.
-- VAStateVariableFilter: A state variable filter with cutoff, resonance and 8 different filter types. This is based on an analog topology.
+- **FeedbackDelay**: A feedback delay with cubic interpolation and support for both audio and control rate arguments.
+- **VAStateVariableFilter**: A state variable filter with cutoff, resonance and 8 different filter types. This is based on an analog topology.
 
 ## Development
 
