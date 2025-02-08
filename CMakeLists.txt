@@ -14,11 +14,10 @@ set(CMAKE_CXX_STANDARD 20)
 # compile commands
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-# Load cpm
+# Load CPM
 include(cmake_modules/CPM.cmake)
 
-# If SC_PATH variable is not set, download supercollider source via CPM and set SC_PATH variable
-# Download supercollider source and set the SC_PATH variable
+# If SC_PATH variable is not set, download SuperCollider source via CPM and set SC_PATH variable
 if(NOT DEFINED SC_PATH)
   message(STATUS "SC_PATH not set, downloading SuperCollider source")
   CPMAddPackage(
@@ -28,12 +27,9 @@ if(NOT DEFINED SC_PATH)
     DOWNLOAD_ONLY TRUE
   )
   set(SC_PATH ${SuperCollider_SOURCE_DIR})
-else()
-  message(STATUS "SC_PATH set to ${SC_PATH}")
-  set(SC_PATH "${SC_PATH}" CACHE PATH
-    "Path to SuperCollider source. Relative paths are treated as relative to this script" FORCE)
 endif()
 
+# Download safety-limiter package
 CPMAddPackage(
   NAME safety-limiter
   GITHUB_REPOSITORY nhthn/safety-limiter
@@ -61,8 +57,7 @@ include(InstallRequiredSystemLibraries)
 
 sc_check_sc_path("${SC_PATH}")
 message(STATUS "Found SuperCollider: ${SC_PATH}")
-set(SC_PATH "${SC_PATH}" CACHE PATH
-    "Path to SuperCollider source. Relative paths are treated as relative to this script" FORCE)
+set(SC_PATH "${SC_PATH}" CACHE PATH "Path to SuperCollider source. Relative paths are treated as relative to this script" FORCE)
 
 include("${SC_PATH}/SCVersion.txt")
 message(STATUS "Building plugins for SuperCollider version: ${SC_VERSION}")
@@ -160,14 +155,3 @@ sc_add_server_plugin(
     "${VAStateVariableFilter_sc_files}"
     "${VAStateVariableFilter_schelp_files}"
 )
-
-
-
-# End target FeedbackDelay
-####################################################################################################
-
-####################################################################################################
-# END PLUGIN TARGET DEFINITION
-####################################################################################################
-
-message(STATUS "Generating plugin targets done")
