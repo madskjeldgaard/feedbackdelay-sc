@@ -89,7 +89,7 @@ s.waitForBoot{
     s.sync;
     Ndef(\delaytest).play;
 
-    Ndef(\delaytest).gui2;
+    Ndef(\delaytest).gui;
 }
 )
 ::
