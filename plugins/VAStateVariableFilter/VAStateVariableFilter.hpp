@@ -8,6 +8,7 @@
 
 #include "../VASVF.hpp"
 #include "SC_PlugIn.hpp"
+#include <memory>
 
 namespace VAStateVariableFilter {
 

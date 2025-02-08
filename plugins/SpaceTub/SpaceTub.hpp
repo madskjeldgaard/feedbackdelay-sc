@@ -12,6 +12,7 @@
 #include "../VASVF.hpp"
 #include "SC_PlugIn.hpp"
 #include "safety_limiter.hpp"
+#include <memory>
 
 namespace SpaceTub {
 

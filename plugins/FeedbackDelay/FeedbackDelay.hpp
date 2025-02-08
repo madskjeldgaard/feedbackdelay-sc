@@ -8,6 +8,7 @@
 
 #include "../DelayLine.hpp"
 #include "SC_PlugIn.hpp"
+#include <memory>
 
 namespace FeedbackDelay {
 
