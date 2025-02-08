@@ -2,7 +2,7 @@
 
 # FeedbackDelay
 
-Does what it says on the tin: A feedback delay plugin for SuperCollider with cubic interpolation and support for both audio and control rate arguments.
+A collection of delay-related plugins for SuperCollider.
 
 ## Features
 
