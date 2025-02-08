@@ -1,0 +1,35 @@
+class:: FeedbackDelay
+summary:: A feedback delay plugin for SuperCollider
+related:: TODO
+categories:: UGens>TODO
+
+description::
+
+A feedback delay plugin for SuperCollider
+
+
+classmethods::
+
+method::ar, kr
+
+argument::TODO
+
+argument::TODO
+
+
+examples::
+
+code::
+
+Ndef(\filterTest,{
+	var maxDelayTime = 30;
+	var input = WhiteNoise.ar(0.5);
+	var cutoff = \cutoff.ar(1500, 0.1, spec: [50,15000,\exp]);
+	var res = \res.ar(0.5, 0.1, spec: [0.1,1.0,\lin]);
+	var type = \type.ar(0, 0.1, spec: [0,7,\lin]);
+
+	VAStateVariableFilter.ar(input, cutoff, res, type)!2
+}).play;
+
+Ndef(\filterTest).gui2;
+::

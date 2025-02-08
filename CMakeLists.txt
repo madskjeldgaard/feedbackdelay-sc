@@ -68,8 +68,8 @@ message(STATUS "Install directory set to: ${CMAKE_INSTALL_PREFIX}")
 # options
 option(SUPERNOVA "Build plugins for supernova" ON)
 option(SCSYNTH "Build plugins for scsynth" ON)
-option(NATIVE "Optimize for native architecture" OFF)
-option(STRICT "Use strict warning flags" OFF)
+option(NATIVE "Optimize for native architecture" ON)
+option(STRICT "Use strict warning flags" ON)
 option(NOVA_SIMD "Build plugins with nova-simd support." ON)
 
 ####################################################################################################
@@ -83,6 +83,7 @@ endif()
 ####################################################################################################
 # Begin target FeedbackDelay
 
+# FeedvackDelay
 set(FeedbackDelay_cpp_files
     plugins/FeedbackDelay/FeedbackDelay.cpp
     plugins/FeedbackDelay/FeedbackDelay.hpp
@@ -100,6 +101,27 @@ sc_add_server_plugin(
     "${FeedbackDelay_cpp_files}"
     "${FeedbackDelay_sc_files}"
     "${FeedbackDelay_schelp_files}"
+)
+
+
+# VAStateVariableFilter
+set(VAStateVariableFilter_cpp_files
+    plugins/VAStateVariableFilter/VAStateVariableFilter.cpp
+    plugins/VAStateVariableFilter/VAStateVariableFilter.hpp
+)
+set(VAStateVariableFilter_sc_files
+    plugins/VAStateVariableFilter/VAStateVariableFilter.sc
+)
+set(VAStateVariableFilter_schelp_files
+    plugins/VAStateVariableFilter/VAStateVariableFilter.schelp
+)
+
+sc_add_server_plugin(
+    "VAStateVariableFilter/VAStateVariableFilter" # desination directory
+    "VAStateVariableFilter" # target name
+    "${VAStateVariableFilter_cpp_files}"
+    "${VAStateVariableFilter_sc_files}"
+    "${VAStateVariableFilter_schelp_files}"
 )
 
 

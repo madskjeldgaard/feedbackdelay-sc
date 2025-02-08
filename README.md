@@ -42,3 +42,7 @@ it's not: add the option `-DSC_PATH=/path/to/sc/source`.
 ### Developing
 
 The project includes vscode-style tasks that should be picked up by vscode and neovim etc.
+
+# Credits
+
+The VA state variable filter code is a rewrite of [Jordan T Harris' juce svf filter](https://github.com/JordanTHarris/VAStateVariableFilter).
