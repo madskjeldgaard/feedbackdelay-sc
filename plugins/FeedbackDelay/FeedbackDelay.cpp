@@ -13,6 +13,10 @@ FeedbackDelay::FeedbackDelay() {
   isDelayTimeAudioRate = isAudioRateIn(DELAYTIME);
   isFeedbackAudioRate = isAudioRateIn(FEEDBACK);
 
+  // Allocate buffer
+  bufsize = NEXTPOWEROFTWO(this->sampleRate() * maxDelayTime);
+  delayBuffer = (float *)RTAlloc(this->mWorld, bufsize * sizeof(float));
+
   // Just pass through the audio with an amount of feedback
   auto feedbackFunc = [](float feedback, float delayed) {
     return feedback * delayed;
@@ -21,8 +25,14 @@ FeedbackDelay::FeedbackDelay() {
   delayLine = std::make_unique<DelayLine<FeedbackFunc>>(
       this->sampleRate(), maxDelayTime, feedbackFunc);
 
+  delayLine->setBuffer(delayBuffer, bufsize);
+
   mCalcFunc = make_calc_function<FeedbackDelay, &FeedbackDelay::next>();
   next(1);
+}
+
+FeedbackDelay::~FeedbackDelay() {
+  RTFree(this->mWorld, delayBuffer);
 }
 
 void FeedbackDelay::next(int nSamples) {

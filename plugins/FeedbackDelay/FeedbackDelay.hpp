@@ -14,7 +14,7 @@ namespace FeedbackDelay {
 class FeedbackDelay : public SCUnit {
 public:
   FeedbackDelay();
-  ~FeedbackDelay() = default;
+  ~FeedbackDelay();
 
 private:
   void next(int nSamples);
@@ -29,6 +29,9 @@ private:
   float delayTimePast, feedbackPast;
   bool isDelayTimeAudioRate;
   bool isFeedbackAudioRate;
+
+  float *delayBuffer;
+  int bufsize;
 
   using FeedbackFunc = std::function<float(float, float)>;
   std::unique_ptr<DelayLine<FeedbackFunc>> delayLine;

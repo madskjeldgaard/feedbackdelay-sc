@@ -1,9 +1,9 @@
 (
 s.waitForBoot{
-    Ndef(\delaytest,{|delayTime=0.5, feedback=0.5, crossfade=0|
+    Ndef(\delaytest,{|delayTime=0.5, feedback=0.5, crossfade=0, lowpass=0.1, highpass=0.1|
         var maxDelayTime = 30;
-        var input = SoundIn.ar(0) * 2;
-        var delayed = FeedbackDelay.ar(input, maxDelayTime, delayTime, feedback);
+        var input = SoundIn.ar(0) * 4;
+        var delayed = FeedbackDelay.ar(input, maxDelayTime, delayTime, feedback*2, lowpass, highpass);
         XFade2.ar(input, delayed, crossfade)
     }).play;
 
