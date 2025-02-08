@@ -31,27 +31,27 @@ FeedbackDelay::FeedbackDelay() {
   next(1);
 }
 
-FeedbackDelay::~FeedbackDelay() {
-  RTFree(this->mWorld, delayBuffer);
-}
+FeedbackDelay::~FeedbackDelay() { RTFree(this->mWorld, delayBuffer); }
 
 void FeedbackDelay::next(int nSamples) {
   const float *input = in(AUDIOINPUT);
   float *outbuf = out(0);
+  auto slopedDelayTime = makeSlope(in0(DELAYTIME), delayTimePast);
+  auto slopedFeedback = makeSlope(in0(FEEDBACK), feedbackPast);
 
   for (int i = 0; i < nSamples; ++i) {
-    float delayTime = isDelayTimeAudioRate
-                          ? in(DELAYTIME)[i]
-                          : makeSlope(in0(DELAYTIME), delayTimePast).consume();
-    float feedback = isFeedbackAudioRate
-                         ? in(FEEDBACK)[i]
-                         : makeSlope(in0(FEEDBACK), feedbackPast).consume();
+    float delayTime =
+        isDelayTimeAudioRate ? in(DELAYTIME)[i] : slopedDelayTime.consume();
+    float feedback =
+        isFeedbackAudioRate ? in(FEEDBACK)[i] : slopedFeedback.consume();
 
     outbuf[i] = delayLine->process(input[i], delayTime, feedback);
   }
 
-  delayTimePast = in0(DELAYTIME);
-  feedbackPast = in0(FEEDBACK);
+  delayTimePast =
+      isDelayTimeAudioRate ? in(DELAYTIME)[nSamples - 1] : delayTimePast;
+  feedbackPast =
+      isFeedbackAudioRate ? in(FEEDBACK)[nSamples - 1] : feedbackPast;
 }
 
 } // namespace FeedbackDelay
