@@ -9,7 +9,7 @@
     {
       "label": "Configure Release",
       "type": "shell",
-      "command": "cmake -S . -B build -DCMAKE_BUILD_TYPE=Release",
+      "command": "cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=\"~/Library/Application Support/SuperCollider/Extensions\"",
     },
     {
       "label": "Configure for Debug",

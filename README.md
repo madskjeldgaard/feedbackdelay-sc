@@ -4,6 +4,12 @@
 
 Does what it says on the tin: A feedback delay plugin for SuperCollider with cubic interpolation and support for both audio and control rate arguments.
 
+## Features
+
+The following plugins are included:
+- FeedbackDelay: A feedback delay with cubic interpolation and support for both audio and control rate arguments.
+- VAStateVariableFilter: A state variable filter with cutoff, resonance and 8 different filter types. This is based on an analog topology.
+
 ## Development
 
 The delay line code is written using modern C++ templating tricks, to allow easily making variations with different operations.
