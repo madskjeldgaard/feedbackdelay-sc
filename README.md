@@ -11,17 +11,23 @@ The following plugins are included:
 - **FeedbackDelay**: A simple feedback delay with cubic interpolation and support for both audio and control rate arguments.
 - **VAStateVariableFilter**: A state variable filter with cutoff, resonance and 8 different filter types. This is based on an analog topology.
 
+## Installation
+
+Either download the pre-built binaries from the [releases page](https://github.com/madskjeldgaard/feedbackdelay-sc/releases) or build the project yourself (recommended on MacOS).
+
+NOTE: currently the macOS binaries are not signed. I recommend building them yourself (below) or see https://github.com/supercollider/supercollider/wiki/macOS-Signing-and-Notarization
+
 ## Development
 
 The delay line code is written using modern C++ templating tricks, to allow easily making variations with different operations.
 
 All dependencies are handled by [CPM](https://github.com/cpm-cmake/CPM.cmake).
 
-## Requirements
+### Requirements
 
 - CMake >= 3.12
 
-## Building
+### Building
 
 The project uses CPM to download the supercollider code and necessary dependencies. 
 
@@ -43,7 +49,7 @@ Then, use CMake to configure and build it:
 You may want to manually specify the install location in the first step to point it at your
 SuperCollider extensions directory: add the option `-DCMAKE_INSTALL_PREFIX=/path/to/extensions`.
 
-### Developing
+#### VSCode tasks
 
 The project includes vscode-style tasks that should be picked up by vscode and neovim etc.
 
