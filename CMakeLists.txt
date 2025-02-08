@@ -28,6 +28,10 @@ if(NOT DEFINED SC_PATH)
     DOWNLOAD_ONLY TRUE
   )
   set(SC_PATH ${SuperCollider_SOURCE_DIR})
+else()
+  message(STATUS "SC_PATH set to ${SC_PATH}")
+  set(SC_PATH "${SC_PATH}" CACHE PATH
+    "Path to SuperCollider source. Relative paths are treated as relative to this script" FORCE)
 endif()
 
 CPMAddPackage(
