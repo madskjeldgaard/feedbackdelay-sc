@@ -15,7 +15,17 @@ The following plugins are included:
 
 Either download the pre-built binaries from the [releases page](https://github.com/madskjeldgaard/feedbackdelay-sc/releases) or build the project yourself (recommended on MacOS).
 
+### MacOS
+
 NOTE: currently the macOS binaries are not signed. I recommend building them yourself (below) or see https://github.com/supercollider/supercollider/wiki/macOS-Signing-and-Notarization
+
+### Linux
+
+If you are on arch based systems, you can install it using an aur helper:
+
+```sh
+yay -S supercollider-feedbackdelay-sc-git
+```
 
 ## Development
 
