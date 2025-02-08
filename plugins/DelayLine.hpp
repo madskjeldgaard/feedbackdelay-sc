@@ -5,6 +5,7 @@
 #include <cmath>
 #include <functional>
 #include <memory>
+#include <cstring> // Include this header for memset
 
 template <typename FeedbackFunc> class DelayLine {
 public:
@@ -18,7 +19,7 @@ public:
     bufsize = bufferSize;
     buf = delayBuffer;
     mask = bufsize - 1;
-    memset(delayBuffer, bufsize, 0.f);
+    memset(delayBuffer, 0, bufsize * sizeof(float)); // Corrected memset usage
   }
 
   auto process(float input, float delayTime, float feedback) {
