@@ -30,6 +30,16 @@ if(NOT DEFINED SC_PATH)
   set(SC_PATH ${SuperCollider_SOURCE_DIR})
 endif()
 
+CPMAddPackage(
+  NAME safety-limiter
+  GITHUB_REPOSITORY nhthn/safety-limiter
+  GIT_TAG develop
+  DOWNLOAD_ONLY TRUE
+)
+
+# Add include directory for safety-limiter
+include_directories(${safety-limiter_SOURCE_DIR})
+
 ####################################################################################################
 # load modules
 include(SuperColliderServerPlugin RESULT_VARIABLE server_plugin_found)
@@ -83,7 +93,30 @@ endif()
 ####################################################################################################
 # Begin target FeedbackDelay
 
-# FeedvackDelay
+# SpaceTub
+set(SpaceTub_cpp_files
+    plugins/SpaceTub/SpaceTub.cpp
+    plugins/SpaceTub/SpaceTub.hpp
+)
+set(SpaceTub_sc_files
+    plugins/SpaceTub/SpaceTub.sc
+)
+set(SpaceTub_schelp_files
+    plugins/SpaceTub/SpaceTub.schelp
+)
+
+sc_add_server_plugin(
+    "SpaceTub/SpaceTub" # desination directory
+    "SpaceTub" # target name
+    "${SpaceTub_cpp_files}"
+    "${SpaceTub_sc_files}"
+    "${SpaceTub_schelp_files}"
+)
+
+target_include_directories("SpaceTub_scsynth" PRIVATE ${safety-limiter_SOURCE_DIR})
+target_include_directories("SpaceTub_supernova" PRIVATE ${safety-limiter_SOURCE_DIR})
+
+# FeedbackDelay
 set(FeedbackDelay_cpp_files
     plugins/FeedbackDelay/FeedbackDelay.cpp
     plugins/FeedbackDelay/FeedbackDelay.hpp

@@ -7,7 +7,8 @@ Does what it says on the tin: A feedback delay plugin for SuperCollider with cub
 ## Features
 
 The following plugins are included:
-- **FeedbackDelay**: A feedback delay with cubic interpolation and support for both audio and control rate arguments.
+- **SpaceTub**: A tape delay inspired echo delay with a softclipper, limiter and state variable filter in the feedback path.
+- **FeedbackDelay**: A simple feedback delay with cubic interpolation and support for both audio and control rate arguments.
 - **VAStateVariableFilter**: A state variable filter with cutoff, resonance and 8 different filter types. This is based on an analog topology.
 
 ## Development

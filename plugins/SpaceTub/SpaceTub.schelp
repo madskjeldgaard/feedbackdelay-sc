@@ -1,0 +1,65 @@
+class:: FeedbackDelay
+summary:: A feedback delay plugin for SuperCollider
+related:: TODO
+categories:: UGens>TODO
+
+description::
+
+A feedback delay plugin for SuperCollider
+
+classmethods::
+
+method::ar, kr
+
+argument::TODO
+
+argument::TODO
+
+
+examples::
+
+code::
+(
+s.waitForBoot{
+    s.sync;
+    b = Buffer.read(s, Platform.resourceDir +/+ "sounds/a11wlk01.wav");
+    s.sync;
+
+    Ndef(\delaytest,{|amp=0.5|
+        var maxDelayTime = 1;
+        var input = PlayBuf.ar(1, b.bufnum, BufRateScale.kr(b.bufnum), 1, 0, 1);
+        var crossfade = \crossfade.ar(0.5, 0.1, spec: [-1,1,\lin]);
+        var spread = \spread.ar(0.5, 0.1, spec: [0,1,\lin]);
+        var delayTime = \delayTime.ar(0.5, 0.1, spec: [0.01,maxDelayTime,\lin]);
+        var feedback = \feedback.ar(0.5, 0.1, spec: [0,1.5,\lin]);
+        var cutoff = \cutoff.ar(1500, 0.1, spec: [50,15000,\exp]);
+        var limRelease = \limRelease.ar(0.5, 0.1, spec: [0.01,1,\lin]);
+        var limHoldTime = \limHoldTime.ar(0.01, 0.1, spec: [0.01,1,\lin]);
+        var res = \res.ar(0.5, 0.1, spec: [0.1,1.0,\lin]);
+        var type = \type.ar(0, 0.1, spec: [0,7,\lin,1]);
+        var clipOn = \clipOn.ar(1, 0.0, spec: [0,1,\lin, 1]);
+        var limitOn = \limitOn.ar(1, 0.0, spec: [0,1,\lin, 1]);
+        var delayed = SpaceTub.ar(
+            in: input,
+            maxdelaytime: maxDelayTime,
+            delaytime: delayTime * [1, 1 + (spread/10.0)],
+            feedback: feedback,
+            cutoff: cutoff,
+            resonance: res,
+            filterType: type,
+            limiterOn: limitOn,
+            limiterRelease: limRelease,
+            limiterHoldTime: limHoldTime,
+            useSoftClip: clipOn
+        );
+
+        XFade2.ar(input, delayed, crossfade) * amp
+    });
+
+    s.sync;
+    Ndef(\delaytest).play;
+
+    Ndef(\delaytest).gui2;
+}
+)
+::
