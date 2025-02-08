@@ -1,20 +1,50 @@
-class:: FeedbackDelay
+class:: SpaceTub
 summary:: A feedback delay plugin for SuperCollider
 related:: TODO
 categories:: UGens>TODO
 
 description::
 
-A feedback delay plugin for SuperCollider
+A tape delay inspired echo delay with a softclipper, limiter and state variable filter in the feedback path.
 
 classmethods::
 
-method::ar, kr
+method::ar
 
-argument::TODO
+argument::in
+Audio input
 
-argument::TODO
+argument::maxdelaytime
 
+Max delay time in seconds
+
+argument::delaytime
+
+Delay time in seconds
+
+argument::feedback
+
+argument::cutoff
+Cutoff frequency in Hz
+
+argument::resonance
+resonance amount (0.0 to 1.0)
+
+argument::filterType
+Filter type (0=lowpass, 1=highpass, 2=bandpass, 3=unity gain bandpass, 4=band
+shelving, 5=notch, 6=allpass, 7=peaking)
+
+argument::limiterOn
+Limiter on/off in feedback path: 0=off, 1=on
+
+argument::limiterRelease
+Limiter release time in seconds
+
+argument::limiterHoldTime
+Limiter hold time in seconds
+
+argument::useSoftClip
+Use soft clipper in feedback path: 0=off, 1=on
 
 examples::
 

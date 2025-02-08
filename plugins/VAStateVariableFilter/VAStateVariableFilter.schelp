@@ -1,21 +1,25 @@
-class:: FeedbackDelay
+class:: VAStateVariableFilter
 summary:: A feedback delay plugin for SuperCollider
 related:: TODO
 categories:: UGens>TODO
 
 description::
 
-A feedback delay plugin for SuperCollider
-
+A virtual analog state variable filter.
 
 classmethods::
 
-method::ar, kr
+method::ar
 
-argument::TODO
+argument::cutoff
+Cutoff frequency in Hz
 
-argument::TODO
+argument::resonance
+resonance amount (0.0 to 1.0)
 
+argument::filterType
+Filter type (0=lowpass, 1=highpass, 2=bandpass, 3=unity gain bandpass, 4=band
+shelving, 5=notch, 6=allpass, 7=peaking)
 
 examples::
 
