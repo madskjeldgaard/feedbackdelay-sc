@@ -4,6 +4,8 @@
 
 A collection of delay-related plugins for SuperCollider.
 
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/tia_EuPZbBg/0.jpg)](https://www.youtube.com/watch?v=tia_EuPZbBg)
+
 ## Features
 
 The following plugins are included:
