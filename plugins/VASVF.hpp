@@ -4,6 +4,7 @@
 // https://github.com/JordanTHarris/VAStateVariableFilter/blob/master/Source/Effects/VAStateVariableFilter.cpp
 
 #include <cmath>
+#include <numbers>
 
 //==============================================================================
 
@@ -169,7 +170,7 @@ private:
   void calcFilter() {
     if (active) {
       // prewarp the cutoff (for bilinear-transform filters)
-      float wd = cutoffFreq * 2.0f * static_cast<float>(M_PI);
+      float wd = cutoffFreq * 2.0f * std::numbers::pi_v<float>;
       float T = 1.0f / sampleRate;
       float wa = (2.0f / T) * std::tan(wd * T / 2.0f);
 
