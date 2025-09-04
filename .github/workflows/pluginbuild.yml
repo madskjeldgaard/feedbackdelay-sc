@@ -93,3 +93,30 @@ jobs:
       with:
         name: ${{ env.PROJECT_NAME }}-${{ matrix.os }}
         path: ${{ github.workspace }}/build/${{ env.PROJECT_NAME }}-*.zip
+  release:
+      needs: build
+      runs-on: ubuntu-latest
+      steps:
+        - name: Download artifacts
+          uses: actions/download-artifact@v4
+          with:
+            name: FeedbackDelay-macos-14
+            path: artifacts/
+        - name: Create GitHub Release
+          uses: actions/create-release@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            tag_name: ${{ github.ref_name }}
+            release_name: Release ${{ github.ref_name }}
+            draft: false
+            prerelease: false
+        - name: Upload Release Asset
+          uses: actions/upload-release-asset@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            upload_url: ${{ steps.create_release.outputs.upload_url }}
+            asset_path: artifacts/FeedbackDelay-macOS-ARM.zip
+            asset_name: FeedbackDelay-macOS-ARM.zip
+            asset_content_type: application/zip
